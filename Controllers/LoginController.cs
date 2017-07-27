@@ -20,6 +20,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace Buru.Controllers
 {
@@ -41,61 +42,6 @@ namespace Buru.Controllers
         }
 
 
-        // Authorization
-        /*public string GetRequestAuthURL(Dictionary<string, string> optionalArguments = null)
-        {
-            string additional = string.Empty;
-            if (optionalArguments != null)
-            {
-                System.Text.StringBuilder optional = new StringBuilder();
-                foreach (var kv in optionalArguments)
-                {
-                    optional = optional.AppendFormat("&{0}={1}", System.Web.HttpUtility.UrlEncode(kv.Key), System.Web.HttpUtility.UrlEncode(kv.Value));
-                }
-                additional = optional.ToString();
-                //x = optional.ToString();
-                //System.IO.File.WriteAllText(@"D:\Visual Studio\Burucoba7.txt", additional);
-            }
-
-            return string.Format(url, client_id, redirectURI, additional);
-        }
-
-        //GET Token
-        public void GetAccessToken()
-        {
-            var requrl = GetRequestAuthURL();
-            var webrequest = System.Net.WebRequest.Create(requrl);
-            if (webrequest != null)
-            {
-                webrequest.Method = "GET";
-                webrequest.ContentType = "/authorization.json";
-            }
-            var resp = webrequest.GetResponse().GetResponseStream();
-            StreamReader reader = new StreamReader(resp);
-            //string responsefromserver = reader.ReadToEnd;
-            System.IO.File.WriteAllText(@"D:\Visual Studio\Burucoba6.txt", Convert.ToString(reader));
-
-            string TokenUrl = string.Format(reqToken, client_id, redirectURI, client_secret, x);
-            System.IO.File.WriteAllText(@"D:\Visual Studio\Burucoba5.txt", TokenUrl);
-            var wr = System.Net.WebRequest.Create(TokenUrl);
-            if (wr != null)
-            {
-                wr.Method = "POST";
-                wr.Timeout = 20000;
-                wr.ContentType = "/authorization.json";
-            }
-            //var resp = (System.Net.HttpWebResponse)wr.GetResponse();
-            using (System.IO.Stream s = wr.GetResponse().GetResponseStream()) 
-            {
-                using (System.IO.StreamReader sr = new System.IO.StreamReader(s))
-                {
-                    var jsonResponse = sr.ReadToEnd();
-                    accessToken = jsonResponse;
-                    System.IO.File.WriteAllText(@"D:\Visual Studio\Burucoba1.txt", jsonResponse);
-                }
-            }
-            //return accessToken;
-        }*/
 
         //Login
         public ActionResult Click()
@@ -103,46 +49,63 @@ namespace Buru.Controllers
             var server = new DotNetOpenAuth.OAuth2.AuthorizationServerDescription();
             server.AuthorizationEndpoint = new Uri(url);
             server.TokenEndpoint = new Uri(reqToken);
-            //var token = server.TokenEndpoint.
             var client = new DotNetOpenAuth.OAuth2.WebServerClient(server, client_id, client_secret);
             client.RequestUserAuthorization(returnTo: new Uri(redirectURI));
-            //client.RequestUserAuthorization(returnTo: new Uri();
-            //var token = client.GetClientAccessToken().AccessToken;
-            //System.IO.File.WriteAllText(@"D:\Visual Studio\a.txt", token);
             return RedirectToAction("Index", "Home");
         }
-            /*var credentials = new BasicAuthenticationCredentials()
-            {
-                AccountId = 3096040,
-                UserName = "alifianif",
-                Password = "050509ds"
-            };
 
-            Api api = new Api(credentials);
-            var project = api.Projects.GetActive();*/
 
-            /*var uname = ConfigurationManager.AppSettings["alifianif"];
+       
+     /*
+
+        public void GetProjects()
+        {
+            var uname = ConfigurationManager.AppSettings["alifianif"];
             var pass = ConfigurationManager.AppSettings["050509ds"];
             var company = ConfigurationManager.AppSettings["Radya Labs"];
             var keepAliveEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["keepAliveEnabled"]);
             var maxReceivedMessageSize = Convert.ToInt32(ConfigurationManager.AppSettings["400"]);
-
-            var credentials = new Credentials(uname, pass, company, keepAliveEnabled, maxReceivedMessageSize);
             var client = new BasecampClient(credentials);
-            //Account account = client.Account.Get();
-            var account = Equals(client.Account.Get());
-            //var akun = account.Get();
-            
-            if (project == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }*/
-            //System.IO.File.WriteAllText(@"D:\Visual Studio\X.txt", Convert.ToString(project));
-            //return RedirectToAction("Index", "Home");
-            //Akun akun = new Akun();
-            //akun.AkunId = 
+            var request = new BasecampRequest(Method.Post);
+
 
         }
+        */
+
+
+
+        /* var credentials = new BasicAuthenticationCredentials()
+         {
+             AccountId = 3096040,
+             UserName = "alifianif",
+             Password = "050509ds"
+         };
+
+         Api api = new Api(credentials);
+         var project = api.Projects.GetActive();
+
+        var uname = ConfigurationManager.AppSettings["alifianif"];
+        var pass = ConfigurationManager.AppSettings["050509ds"];
+        var company = ConfigurationManager.AppSettings["Radya Labs"];
+        var keepAliveEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["keepAliveEnabled"]);
+        var maxReceivedMessageSize = Convert.ToInt32(ConfigurationManager.AppSettings["400"]);
+
+        var credentials = new Credentials(uname, pass, company, keepAliveEnabled, maxReceivedMessageSize);
+        var client = new BasecampClient(credentials);
+        //Account account = client.Account.Get();
+        var account = Equals(client.Account.Get());
+        //var akun = account.Get();
+
+        if (project == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }*/
+        //System.IO.File.WriteAllText(@"D:\Visual Studio\X.txt", Convert.ToString(project));
+        //return RedirectToAction("Index", "Home");
+        //Akun akun = new Akun();
+        //akun.AkunId = 
+
+    }
 
     }
 //}
