@@ -255,7 +255,6 @@ D:\Visual Studio\KP\backup\Buru\Buru\bin\roslyn\System.Xml.XPath.dll
 D:\Visual Studio\KP\backup\Buru\Buru\bin\roslyn\System.Xml.XPath.XDocument.dll
 D:\Visual Studio\KP\backup\Buru\Buru\bin\roslyn\vbc.exe.config
 D:\Visual Studio\KP\backup\Buru\Buru\bin\roslyn\vbc.rsp
-D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNet37Signals.Client.dll
 D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNetOpenAuth.Core.dll
 D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNetOpenAuth.Core.UI.dll
 D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNetOpenAuth.InfoCard.dll
@@ -304,3 +303,7 @@ D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNetOpenAuth.OpenIdInfoCard.UI.xml
 D:\Visual Studio\KP\backup\Buru\Buru\bin\DotNetOpenAuth.OpenIdOAuth.xml
 D:\Visual Studio\KP\backup\Buru\Buru\bin\Org.Mentalis.Security.Cryptography.xml
 D:\Visual Studio\KP\backup\Buru\Buru\bin\Mono.Math.xml
+D:\Visual Studio\KP\backup\Buru\Buru\bin\Json.dll
+D:\Visual Studio\KP\backup\Buru\Buru\bin\Json.pdb
+D:\Visual Studio\KP\backup\Buru\Buru\bin\RestSharp.dll
+D:\Visual Studio\KP\backup\Buru\Buru\bin\RestSharp.xml
