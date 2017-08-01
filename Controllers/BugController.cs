@@ -34,7 +34,7 @@ namespace Buru.Controllers
             }
 
             return View(viewModel);*/
-                return View(db.ListBugs.ToList());
+                return View(db.Bugs.ToList());
         }
 
         // GET: Bug/Details/5
