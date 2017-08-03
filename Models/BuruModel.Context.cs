@@ -13,10 +13,10 @@ namespace Buru.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BuruDataEntities6 : DbContext
+    public partial class BuruDataEntities7 : DbContext
     {
-        public BuruDataEntities6()
-            : base("name=BuruDataEntities6")
+        public BuruDataEntities7()
+            : base("name=BuruDataEntities7")
         {
         }
     
@@ -27,7 +27,7 @@ namespace Buru.Models
     
         public virtual DbSet<Akun> Akuns { get; set; }
         public virtual DbSet<Bug> Bugs { get; set; }
+        public virtual DbSet<Dock> Docks { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<ToDoSet> ToDoSets { get; set; }
     }
 }

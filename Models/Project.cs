@@ -14,6 +14,12 @@ namespace Buru.Models
     
     public partial class Project
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Project()
+        {
+            this.Docks = new HashSet<Dock>();
+        }
+    
         public string id { get; set; }
         public string status { get; set; }
         public string created_at { get; set; }
@@ -25,7 +31,8 @@ namespace Buru.Models
         public string url { get; set; }
         public string app_url { get; set; }
         public string bookmarked { get; set; }
-        public string todosetid { get; set; }
-        public string todoseturl { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dock> Docks { get; set; }
     }
 }

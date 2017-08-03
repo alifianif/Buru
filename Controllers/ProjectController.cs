@@ -12,14 +12,13 @@ using System.Net.Http.Headers;
 using System.IO;
 using System.Threading.Tasks;
 using System.Text;
-using Buru.JsonFormatted;
 using Newtonsoft.Json;
 
 namespace Buru.Controllers
 {
     public class ProjectController : Controller
     {
-        private BuruDataEntities5 db = new BuruDataEntities5();
+        private BuruDataEntities6 db = new BuruDataEntities6();
         private static readonly HttpClient client = new HttpClient();
 
         // GET: Project
@@ -39,21 +38,19 @@ namespace Buru.Controllers
                 using (HttpContent content = responseMessage.Content)
                 {
                     string mycontent = await content.ReadAsStringAsync();
+                    List<Project> proj = JsonConvert.DeserializeObject<List<Project>>(mycontent);
+                    foreach (var project in proj)
+                    {
+                        db.Projects.Add(project);
+                    }
                     //System.IO.File.WriteAllText(@"D:\Visual Studio\projects5.txt", mycontent);
                 }
             }
                 return View(db.Projects.ToList());
         }
+        
 
-        //add to db
-        public void addToDb (string content)
-        {
-            List<ProjectBC> proj = JsonConvert.DeserializeObject<List<ProjectBC>>(content);
-            foreach (var project in proj)
-            {
 
-            }
-        }
 
         // GET: Project/Details/5
         public ActionResult Details(int? id)

@@ -12,7 +12,7 @@ namespace Buru.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ToDoSet
+    public partial class Dock
     {
         public string id { get; set; }
         public string title { get; set; }
@@ -21,5 +21,8 @@ namespace Buru.Models
         public Nullable<int> position { get; set; }
         public string url { get; set; }
         public string app_url { get; set; }
+        public string projectid { get; set; }
+    
+        public virtual Project Project { get; set; }
     }
 }

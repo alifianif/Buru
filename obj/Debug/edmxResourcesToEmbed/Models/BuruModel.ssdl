@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="AkunId" />
     </Key>
-    <Property Name="AkunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AkunId" Type="nvarchar" MaxLength="25" Nullable="false" />
     <Property Name="Username" Type="nvarchar" MaxLength="100" />
     <Property Name="Password" Type="nvarchar" MaxLength="8" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -25,107 +25,40 @@
     <Property Name="Kind" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="ListBug">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProjectId" Type="int" Nullable="false" />
-    <Property Name="BugId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ListUser">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProjectId" Type="int" Nullable="false" />
-    <Property Name="AkunId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Project">
     <Key>
-      <PropertyRef Name="ProjectId" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="DueDate" Type="datetime" Nullable="false" />
+    <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="10" />
+    <Property Name="created_at" Type="nvarchar" MaxLength="50" />
+    <Property Name="updated_at" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="100" />
+    <Property Name="purpose" Type="nvarchar" MaxLength="25" />
+    <Property Name="bookmark_url" Type="nvarchar" MaxLength="1000" />
+    <Property Name="url" Type="nvarchar" MaxLength="100" />
+    <Property Name="app_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="bookmarked" Type="nvarchar" MaxLength="10" />
+    <Property Name="todosetid" Type="nvarchar" MaxLength="25" />
+    <Property Name="todoseturl" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK_dbo_ListUser_dbo_Akun_AkunId">
-    <End Role="Akun" Type="Self.Akun" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="ListUser" Type="Self.ListUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Akun">
-        <PropertyRef Name="AkunId" />
-      </Principal>
-      <Dependent Role="ListUser">
-        <PropertyRef Name="AkunId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_ListUser_dbo_Project_ProjectId">
-    <End Role="Project" Type="Self.Project" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="ListUser" Type="Self.ListUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Project">
-        <PropertyRef Name="ProjectId" />
-      </Principal>
-      <Dependent Role="ListUser">
-        <PropertyRef Name="ProjectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_ProjectBugs_dbo_Bug_BugId">
-    <End Role="Bug" Type="Self.Bug" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="ListBug" Type="Self.ListBug" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Bug">
-        <PropertyRef Name="BugId" />
-      </Principal>
-      <Dependent Role="ListBug">
-        <PropertyRef Name="BugId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_ProjectBugs_dbo_Project_ProjectId">
-    <End Role="Project" Type="Self.Project" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="ListBug" Type="Self.ListBug" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Project">
-        <PropertyRef Name="ProjectId" />
-      </Principal>
-      <Dependent Role="ListBug">
-        <PropertyRef Name="ProjectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="ToDoSets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="25" />
+    <Property Name="enabled" Type="nvarchar" MaxLength="10" />
+    <Property Name="position" Type="int" />
+    <Property Name="url" Type="nvarchar" MaxLength="50" />
+    <Property Name="app_url" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityContainer Name="BuruDataModelStoreContainer">
     <EntitySet Name="Akun" EntityType="Self.Akun" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bug" EntityType="Self.Bug" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ListBug" EntityType="Self.ListBug" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ListUser" EntityType="Self.ListUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_dbo_ListUser_dbo_Akun_AkunId" Association="Self.FK_dbo_ListUser_dbo_Akun_AkunId">
-      <End Role="Akun" EntitySet="Akun" />
-      <End Role="ListUser" EntitySet="ListUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_ListUser_dbo_Project_ProjectId" Association="Self.FK_dbo_ListUser_dbo_Project_ProjectId">
-      <End Role="Project" EntitySet="Project" />
-      <End Role="ListUser" EntitySet="ListUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_ProjectBugs_dbo_Bug_BugId" Association="Self.FK_dbo_ProjectBugs_dbo_Bug_BugId">
-      <End Role="Bug" EntitySet="Bug" />
-      <End Role="ListBug" EntitySet="ListBug" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_ProjectBugs_dbo_Project_ProjectId" Association="Self.FK_dbo_ProjectBugs_dbo_Project_ProjectId">
-      <End Role="Project" EntitySet="Project" />
-      <End Role="ListBug" EntitySet="ListBug" />
-    </AssociationSet>
+    <EntitySet Name="ToDoSets" EntityType="Self.ToDoSets" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

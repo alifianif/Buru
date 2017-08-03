@@ -388,13 +388,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BuruModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dock.cs">
+      <DependentUpon>BuruModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Identity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs">
-      <DependentUpon>BuruModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ToDoSet.cs">
       <DependentUpon>BuruModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Token.cs" />

@@ -30,6 +30,19 @@
           <Property Name="Kind" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Dock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="25" />
+          <Property Name="enabled" Type="nvarchar" MaxLength="10" />
+          <Property Name="position" Type="int" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" />
+          <Property Name="app_url" Type="nvarchar" MaxLength="50" />
+          <Property Name="projectid" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="id" />
@@ -45,26 +58,30 @@
           <Property Name="url" Type="nvarchar" MaxLength="100" />
           <Property Name="app_url" Type="nvarchar" MaxLength="100" />
           <Property Name="bookmarked" Type="nvarchar" MaxLength="10" />
-          <Property Name="todosetid" Type="nvarchar" MaxLength="25" />
-          <Property Name="todoseturl" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="ToDoSets">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="title" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="25" />
-          <Property Name="enabled" Type="nvarchar" MaxLength="10" />
-          <Property Name="position" Type="int" />
-          <Property Name="url" Type="nvarchar" MaxLength="50" />
-          <Property Name="app_url" Type="nvarchar" MaxLength="50" />
-        </EntityType>
+        <Association Name="FK_dbo_Dock_dbo_Project_id">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Dock" Type="Self.Dock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dock">
+              <PropertyRef Name="projectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BuruDataModelStoreContainer">
           <EntitySet Name="Akun" EntityType="Self.Akun" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bug" EntityType="Self.Bug" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dock" EntityType="Self.Dock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ToDoSets" EntityType="Self.ToDoSets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Dock_dbo_Project_id" Association="Self.FK_dbo_Dock_dbo_Project_id">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Dock" EntitySet="Dock" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -96,6 +113,20 @@
           <Property Name="Kind" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
+        <EntityType Name="Dock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="enabled" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="position" Type="Int32" />
+          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="app_url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projectid" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_dbo_Dock_dbo_Project_id" FromRole="Dock" ToRole="Project" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="id" />
@@ -111,33 +142,38 @@
           <Property Name="url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="app_url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="bookmarked" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="todosetid" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="todoseturl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Docks" Relationship="Self.FK_dbo_Dock_dbo_Project_id" FromRole="Project" ToRole="Dock" />
         </EntityType>
-        <EntityType Name="ToDoSet">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="enabled" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="position" Type="Int32" />
-          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="app_url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="BuruDataEntities6" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_dbo_Dock_dbo_Project_id">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Dock" Type="Self.Dock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dock">
+              <PropertyRef Name="projectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BuruDataEntities7" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Akuns" EntityType="Self.Akun" />
           <EntitySet Name="Bugs" EntityType="Self.Bug" />
+          <EntitySet Name="Docks" EntityType="Self.Dock" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
-          <EntitySet Name="ToDoSets" EntityType="Self.ToDoSet" />
+          <AssociationSet Name="FK_dbo_Dock_dbo_Project_id" Association="Self.FK_dbo_Dock_dbo_Project_id">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Dock" EntitySet="Docks" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BuruDataModelStoreContainer" CdmEntityContainer="BuruDataEntities6">
+        <EntityContainerMapping StorageEntityContainer="BuruDataModelStoreContainer" CdmEntityContainer="BuruDataEntities7">
           <EntitySetMapping Name="Akuns">
             <EntityTypeMapping TypeName="BuruDataModel.Akun">
               <MappingFragment StoreEntitySet="Akun">
@@ -165,6 +201,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Docks">
+            <EntityTypeMapping TypeName="BuruDataModel.Dock">
+              <MappingFragment StoreEntitySet="Dock">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="app_url" ColumnName="app_url" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="BuruDataModel.Project">
               <MappingFragment StoreEntitySet="Project">
@@ -179,21 +229,6 @@
                 <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="app_url" ColumnName="app_url" />
                 <ScalarProperty Name="bookmarked" ColumnName="bookmarked" />
-                <ScalarProperty Name="todosetid" ColumnName="todosetid" />
-                <ScalarProperty Name="todoseturl" ColumnName="todoseturl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ToDoSets">
-            <EntityTypeMapping TypeName="BuruDataModel.ToDoSet">
-              <MappingFragment StoreEntitySet="ToDoSets">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="enabled" ColumnName="enabled" />
-                <ScalarProperty Name="position" ColumnName="position" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="app_url" ColumnName="app_url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

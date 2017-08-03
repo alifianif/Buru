@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BuruDataModelStoreContainer" CdmEntityContainer="BuruDataEntities5">
+  <EntityContainerMapping StorageEntityContainer="BuruDataModelStoreContainer" CdmEntityContainer="BuruDataEntities6">
     <EntitySetMapping Name="Akuns">
       <EntityTypeMapping TypeName="BuruDataModel.Akun">
         <MappingFragment StoreEntitySet="Akun">
@@ -28,30 +28,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ListBugs">
-      <EntityTypeMapping TypeName="BuruDataModel.ListBug">
-        <MappingFragment StoreEntitySet="ListBug">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="BugId" ColumnName="BugId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ListUsers">
-      <EntityTypeMapping TypeName="BuruDataModel.ListUser">
-        <MappingFragment StoreEntitySet="ListUser">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="AkunId" ColumnName="AkunId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Projects">
       <EntityTypeMapping TypeName="BuruDataModel.Project">
         <MappingFragment StoreEntitySet="Project">
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="purpose" ColumnName="purpose" />
+          <ScalarProperty Name="bookmark_url" ColumnName="bookmark_url" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="app_url" ColumnName="app_url" />
+          <ScalarProperty Name="bookmarked" ColumnName="bookmarked" />
+          <ScalarProperty Name="todosetid" ColumnName="todosetid" />
+          <ScalarProperty Name="todoseturl" ColumnName="todoseturl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToDoSets">
+      <EntityTypeMapping TypeName="BuruDataModel.ToDoSet">
+        <MappingFragment StoreEntitySet="ToDoSets">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="enabled" ColumnName="enabled" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="app_url" ColumnName="app_url" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
