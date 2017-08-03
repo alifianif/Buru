@@ -362,6 +362,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="JsonFormatted\Dock.cs" />
+    <Compile Include="JsonFormatted\ProjectBC.cs" />
     <Compile Include="Models\Accounts.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Akun.cs">

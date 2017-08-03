@@ -7,17 +7,52 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Buru.Models;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.IO;
+using System.Threading.Tasks;
+using System.Text;
+using Buru.JsonFormatted;
+using Newtonsoft.Json;
 
 namespace Buru.Controllers
 {
     public class ProjectController : Controller
     {
         private BuruDataEntities5 db = new BuruDataEntities5();
+        private static readonly HttpClient client = new HttpClient();
 
         // GET: Project
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-            return View(db.Projects.ToList());
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var id = System.IO.File.ReadAllText(@"D:\Visual Studio\idcompany.txt");
+            var access_token = System.IO.File.ReadAllText(@"D:\Visual Studio\params1.txt");
+            string projects = string.Format("https://3.basecampapi.com/" + id + "/projects.json");
+            var stringbuilder = new StringBuilder(projects);
+            //System.IO.File.WriteAllText(@"D:\Visual Studio\link.txt", projects);
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + access_token);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Buru Bugs (alifiani12@gmail.com)");
+            using (HttpResponseMessage responseMessage = await client.GetAsync(projects))
+            {
+                using (HttpContent content = responseMessage.Content)
+                {
+                    string mycontent = await content.ReadAsStringAsync();
+                    //System.IO.File.WriteAllText(@"D:\Visual Studio\projects5.txt", mycontent);
+                }
+            }
+                return View(db.Projects.ToList());
+        }
+
+        //add to db
+        public void addToDb (string content)
+        {
+            List<ProjectBC> proj = JsonConvert.DeserializeObject<List<ProjectBC>>(content);
+            foreach (var project in proj)
+            {
+
+            }
         }
 
         // GET: Project/Details/5
@@ -27,7 +62,7 @@ namespace Buru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Models.Project project = db.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -47,7 +82,7 @@ namespace Buru.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectId,Name,DueDate,AkunId")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectId,Name,DueDate,AkunId")] Models.Project project)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +102,7 @@ namespace Buru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Models.Project project = db.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -81,7 +116,7 @@ namespace Buru.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectId,Name,DueDate,AkunId")] Project project)
+        public ActionResult Edit([Bind(Include = "ProjectId,Name,DueDate,AkunId")] Models.Project project)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +135,7 @@ namespace Buru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Models.Project project = db.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -113,7 +148,7 @@ namespace Buru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Project project = db.Projects.Find(id);
+            Models.Project project = db.Projects.Find(id);
             db.Projects.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");
