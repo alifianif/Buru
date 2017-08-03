@@ -14,20 +14,18 @@ namespace Buru.Models
     
     public partial class Project
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
-        {
-            this.ListBugs = new HashSet<ListBug>();
-            this.ListUsers = new HashSet<ListUser>();
-        }
-    
-        public int ProjectId { get; set; }
-        public string Name { get; set; }
-        public System.DateTime DueDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListBug> ListBugs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListUser> ListUsers { get; set; }
+        public string id { get; set; }
+        public string status { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string purpose { get; set; }
+        public string bookmark_url { get; set; }
+        public string url { get; set; }
+        public string app_url { get; set; }
+        public string bookmarked { get; set; }
+        public string todosetid { get; set; }
+        public string todoseturl { get; set; }
     }
 }

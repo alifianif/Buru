@@ -12,13 +12,14 @@ namespace Buru.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ListBug
+    public partial class ToDoSet
     {
-        public int Id { get; set; }
-        public int ProjectId { get; set; }
-        public int BugId { get; set; }
-    
-        public virtual Bug Bug { get; set; }
-        public virtual Project Project { get; set; }
+        public string id { get; set; }
+        public string title { get; set; }
+        public string name { get; set; }
+        public string enabled { get; set; }
+        public Nullable<int> position { get; set; }
+        public string url { get; set; }
+        public string app_url { get; set; }
     }
 }

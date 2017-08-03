@@ -390,14 +390,11 @@
     </Compile>
     <Compile Include="Models\Identity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ListBug.cs">
-      <DependentUpon>BuruModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ListUser.cs">
-      <DependentUpon>BuruModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs">
+      <DependentUpon>BuruModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToDoSet.cs">
       <DependentUpon>BuruModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Token.cs" />

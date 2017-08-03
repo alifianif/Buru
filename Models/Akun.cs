@@ -14,18 +14,9 @@ namespace Buru.Models
     
     public partial class Akun
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Akun()
-        {
-            this.ListUsers = new HashSet<ListUser>();
-        }
-    
-        public int AkunId { get; set; }
+        public string AkunId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListUser> ListUsers { get; set; }
     }
 }

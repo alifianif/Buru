@@ -14,12 +14,6 @@ namespace Buru.Models
     
     public partial class Bug
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bug()
-        {
-            this.ListBugs = new HashSet<ListBug>();
-        }
-    
         public int BugId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -31,8 +25,5 @@ namespace Buru.Models
         public string Severity { get; set; }
         public string Kind { get; set; }
         public string Status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListBug> ListBugs { get; set; }
     }
 }
